@@ -142,30 +142,16 @@ SELECT
  'HELLO' LIKE '%LL%', -- 중간에 LL이 들어가는면 OK => TRUE
  'HELLO' LIKE '%HELLO%', -- 문자열 안에 HELLO가 포함되면 OK => TRUE
  'HELLO' LIKE '%H', -- H로 끝나야함(핵심) => 
- 'HELLO' LIKE '문자열', --  => 
+ 'HELLO' LIKE 'L%', -- L로 시작해야함 => FALSE
 
 SELECT 
- 'HELLO' LIKE '문자열', --  => 
- 'HELLO' LIKE '문자열', --  => 
- 'HELLO' LIKE '문자열', --  => 
- 'HELLO' LIKE '문자열', --  => 
- 'HELLO' LIKE '문자열', --  => 
- 'HELLO' LIKE '문자열', --  => 
- 'HELLO' LIKE '문자열', --  => 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	'HELLO' LIKE 'HELL__', -- 자리수가 하나 더 많음 => FALSE
+	'HELLO' LIKE 'h___O', -- 앞뒤 문자 맞고 자릿수가 맞음 => TRUE
+	'HELLO' LIKE 'HE_LO',-- => TRUE
+	'HELLO' LIKE '_____', -- 자릿수가 맞음 => TRUE
+	'HELLO' LIKE '_HELLO', -- 앞에 필요 없는 데 _가 있음=> FALSE
+	'HELLO' LIKE 'HEL_', -- 자릿수가 적음 => FALSE
+	'HELLO' LIKE 'H_O'; -- 자릿수가 적음 => FALSE
 
 
 
